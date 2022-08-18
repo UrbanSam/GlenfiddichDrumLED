@@ -25,6 +25,7 @@ public class OSCReceiver : MonoBehaviour
 
     void OnReceive(OscMessage message)
     {
+                Debug.Log(address+"   :  "+message.values);
         if (message.values.Count > 0)
         {
             for (int i = 0; i < message.values.Count; i++)
@@ -33,6 +34,14 @@ public class OSCReceiver : MonoBehaviour
                 Debug.Log(address+"   :  "+message.values[i]);
             }
         }
+    }
+
+    void OnConnectionEvent(bool success)
+    {
+        if (success)
+            Debug.Log("Connection established");
+        else
+            Debug.Log("Connection attempt failed or disconnection detected");
     }
 
 }

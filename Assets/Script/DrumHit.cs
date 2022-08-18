@@ -15,6 +15,8 @@ public class DrumHit : MonoBehaviour
     public KeyCode key;
     public int _index;
 
+    public ShootParticle shootParticle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,11 +28,8 @@ public class DrumHit : MonoBehaviour
     {
         if(Input.GetKeyDown(key))
         {
-            DrumParticle dp = EZ_PoolManager.Spawn(spawnParticle, trans.position, Quaternion.identity).GetComponent<DrumParticle>();
-            dp.mR.material.color = color;
-            dp.rigid.velocity = direction * speed;
-            dp.transform.localScale = scale;
-            GameManager.instance.AddScore(_index);
+            
+            Spawn();
         }
     }
     void OnMessageArrived(string msg)
@@ -41,10 +40,13 @@ public class DrumHit : MonoBehaviour
 
     public void Spawn()
     {
+        if (!Game2Manager.instance.gameStart) return;
         DrumParticle dp = EZ_PoolManager.Spawn(spawnParticle, trans.position, Quaternion.identity).GetComponent<DrumParticle>();
         dp.mR.material.color = color;
         dp.rigid.velocity = direction * speed;
         dp.transform.localScale = scale;
+        Game2Manager.instance.AddScore(_index);
+        shootParticle.Move();
     }
 
     // Invoked when a connect/disconnect event occurs. The parameter 'success'
@@ -58,8 +60,4 @@ public class DrumHit : MonoBehaviour
             Debug.Log("Connection attempt failed or disconnection detected");
     }
 
-    void OnBecameInvisible()
-    {
-        EZ_PoolManager.Despawn(transform);
-    }
 }

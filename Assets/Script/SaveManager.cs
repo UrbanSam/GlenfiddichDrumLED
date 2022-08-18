@@ -14,10 +14,18 @@ public class MySaveClass
     public int scoreAdd;
     public int randomHitAdd;
     public float stayDuration;
+    public float specialDuration;
     public float seqPlaySpeed;
+    public float seqRewindPlaySpeed;
+    public float multiplier;
     public int seqAddFrame;
     public bool useBackground;
     public bool useDissolve;
+    public int[] hitTarget;
+    public bool specialWinner;
+    public float dimLED;
+    public Vector3[] particlePos;
+    public float sfxVolume;
 
     public MySaveClass()
     {
@@ -86,12 +94,15 @@ public class SaveManager : MonoBehaviour
                 drumHit[ii].scale = saveData.data[ii].scale;
                 drumHit[ii].direction = saveData.data[ii].direction;
                 drumHit[ii].speed = saveData.data[ii].speed;
+                drumHit[ii].shootParticle.cc.SetColor(saveData.data[ii].color);
+                //Game2Manager.instance.SetLEDColor(ii, saveData.data[ii].color);
             }
             catch (System.Exception)
             {
 
             }
         }
+
     }
 
     public void Save()

@@ -1,16 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RenderHeads.Media.AVProVideo;
 
-public class DrumParticle : MonoBehaviour
+public class MyVideoEvent : MonoBehaviour
 {
-    public Rigidbody rigid;
-    public MeshRenderer mR;
+    public MediaPlayer mp;
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -18,20 +17,4 @@ public class DrumParticle : MonoBehaviour
     {
         
     }
-
-    public void SetColor()
-    {
-
-    }
-
-    public void SetSize()
-    {
-
-    }
-
-    public void SetSpeed()
-    {
-
-    }
-
 }
